@@ -2,21 +2,28 @@ pipeline {
   agent any
 
   environment {
-    DOCKERHUB = credentials('dockerhub-cred')
+    IMAGE_NAME = 'dhar888/cicd-app:latest'
   }
 
   stages {
 
     stage('Build Docker Image') {
       steps {
-        bat 'docker build -t dhar888/cicd-app:latest .'
+        bat 'docker build -t %IMAGE_NAME% .'
       }
     }
 
     stage('Push to DockerHub') {
       steps {
-        bat 'docker login -u %DOCKERHUB_USR% -p %DOCKERHUB_PSW%'
-        bat 'docker push dhar888/cicd-app:latest'
+        withCredentials([usernamePassword(
+          credentialsId: 'dockerhub-cred',
+          usernameVariable: 'USERNAME',
+          passwordVariable: 'PASSWORD'
+        )]) {
+          bat 'docker login -u %USERNAME% -p %PASSWORD%'
+          bat 'docker push %IMAGE_NAME%'
+          bat 'docker logout'
+        }
       }
     }
 
