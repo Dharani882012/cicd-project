@@ -26,6 +26,11 @@ pipeline {
         }
       }
     }
+    stage('Test K8s') {
+      steps {
+        bat 'kubectl get pods'
+      }
+    }
 
     stage('Deploy to Kubernetes') {
       steps {
