@@ -9,20 +9,20 @@ pipeline {
 
     stage('Build Docker Image') {
       steps {
-        sh 'docker build -t dhar888/cicd-app:latest .'
+        bat 'docker build -t dhar888/cicd-app:latest .'
       }
     }
 
     stage('Push to DockerHub') {
       steps {
-        sh 'docker login -u $DOCKERHUB_USR -p $DOCKERHUB_PSW'
-        sh 'docker push dhar888/cicd-app:latest'
+        bat 'docker login -u %DOCKERHUB_USR% -p %DOCKERHUB_PSW%'
+        bat 'docker push dhar888/cicd-app:latest'
       }
     }
 
     stage('Deploy to Kubernetes') {
       steps {
-        sh 'kubectl apply -f deployment.yaml'
+        bat 'kubectl apply -f deployment.yaml'
       }
     }
   }
