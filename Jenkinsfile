@@ -9,7 +9,7 @@ pipeline {
 
     stage('Clone Code from GitHub') {
       steps {
-        git 'https://github.com/your-username/cicd-project.git'
+        git 'https://github.com/Dharani882012/cicd-project.git'
       }
     }
 
