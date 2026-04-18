@@ -7,12 +7,6 @@ pipeline {
 
   stages {
 
-    stage('Clone Code from GitHub') {
-      steps {
-        git 'https://github.com/Dharani882012/cicd-project.git'
-      }
-    }
-
     stage('Build Docker Image') {
       steps {
         sh 'docker build -t dhar888/cicd-app:latest .'
