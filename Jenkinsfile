@@ -28,8 +28,8 @@ pipeline {
     }
     stage('Test K8s') {
       steps {
-        bat 'kubectl get pods'
-      }
+        bat 'set KUBECONFIG=C:\\Users\\Dharani\\.kube\\config && kubectl get pods'
+      } 
     }
 
     stage('Deploy to Kubernetes') {
